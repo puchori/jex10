@@ -1,0 +1,54 @@
+책이름 : 코드로 배우는 스프링 웹 프로젝트
+
+1. 자바버전 : jdk1.8.0_261
+2. eclipse 버전 : eclipse-jee-2019-12-R-win32-x86_64
+3. spring tools 3 플러그인 추가 : Eclipse내 Help/MarketPlace
+4. Tomcat 9 서버 설정 : c/apache-tomcat-9.0.8
+5. 스프링 프로젝트 생성 : File/New/Spring Legacy Project
+6. oracle 11g Exoress Edition 다운 : https://junhokims.tistory.com/53
+
+
+1. XML을 이용하는 의존성 주입 설정
+	1) 
+
+2. 스프링프레임워크 실행 순서
+	1) 스프링에서 ApplicationContext라는 이름 객체 만듬
+	2) 스프링은 자신이 객체를 생성하고 관리해야 하는 객체들에 대한 설정 --> root-context.xml
+	3) root-context.xml의 <context:component-scan> 태그의 내용을 통해서 'org.zerock.sample 패키지를 스캔하기 시작'
+	4) 해당 패키지에 있는 클래스 중 스피링이 사용하는 @Component라는 어노테이션이 존재하는 클래스 인스턴스 생성
+	5) Restaurant 객체는 Chef 객체가 필요하다는 어노테이션(@Autowired) 설정이 있으므로, 스프링은 Chef 객체의 레퍼런스를 Restaurant객체에 주입합니다.
+	
+	
+3. Junit 실행 결과 log 해석
+	INFO : org.springframework.test.context.support.DefaultTestContextBootstrapper - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+	INFO : org.springframework.test.context.support.DefaultTestContextBootstrapper - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@26653222, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@3532ec19, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@68c4039c, org.springframework.test.context.support.DirtiesContextTestExecutionListener@ae45eb6]
+	INFO : org.springframework.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from URL [file:src/main/webapp/WEB-INF/spring/root-context.xml]
+	INFO : org.springframework.context.support.GenericApplicationContext - Refreshing org.springframework.context.support.GenericApplicationContext@31dc339b: startup date [Thu Jul 07 23:09:26 KST 2022]; root of context hierarchy
+	INFO : org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+	INFO : org.zerock.sample.SampleTests - Restaurant(chef=Chef())
+	INFO : org.zerock.sample.SampleTests - -------------------------------
+	INFO : org.zerock.sample.SampleTests - Chef()
+	INFO : org.springframework.context.support.GenericApplicationContext - Closing org.springframework.context.support.GenericApplicationContext@31dc339b: startup date [Thu Jul 07 23:09:26 KST 2022]; root of context hierarchy
+	
+	1) New 한적 없는데 Restaurant와 같이 클래스 객체 생성, 일종 컨테이너나 팩토리 기능 가지고 있음
+	
+4.	Tomcat Server
+	1. 오른쪽 클릭 new Server
+	2. server name 변경
+	3. 해당 소스 선택 후 생성
+
+5. Sample Controller 시작시
+	INFO : org.springframework.web.servlet.DispatcherServlet - FrameworkServlet 'appServlet': initialization started
+	INFO : org.springframework.web.context.support.XmlWebApplicationContext - Refreshing WebApplicationContext for namespace 'appServlet-servlet': startup date [Thu Jul 28 21:49:23 KST 2022]; parent: Root WebApplicationContext
+	INFO : org.springframework.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from ServletContext resource [/WEB-INF/spring/appServlet/servlet-context.xml]
+	INFO : org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+	INFO : org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/],methods=[GET]}" onto public java.lang.String org.zerock.controller.HomeController.home(java.util.Locale,org.springframework.ui.Model)
+	INFO : org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/sample/*]}" onto public void org.zerock.controller.SampleController.basic()
+	INFO : org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter - Looking for @ControllerAdvice: WebApplicationContext for namespace 'appServlet-servlet': startup date [Thu Jul 28 21:49:23 KST 2022]; parent: Root WebApplicationContext
+	INFO : org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter - Looking for @ControllerAdvice: WebApplicationContext for namespace 'appServlet-servlet': startup date [Thu Jul 28 21:49:23 KST 2022]; parent: Root WebApplicationContext
+	INFO : org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped URL path [/resources/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+INFO : org.springframework.web.servlet.DispatcherServlet - FrameworkServlet 'appServlet': initialization completed in 1564 ms
+
+
+test
+testtest

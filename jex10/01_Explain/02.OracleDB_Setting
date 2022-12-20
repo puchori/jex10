@@ -1,0 +1,26 @@
+02. OracleSQL
+
+1. 계정 이름 등록  BOOK_EX, 기본 테이블 스페이스,임시 테이블 스페이스 지정
+CREATE USER book_ex IDENTIFIED BY book_ex
+DEFAULT TABLESPACE USERS
+TEMPORARY TABLESPACE TEMP;
+
+book_ex//book_ex
+2. 권한 주기
+GRANT CONNECT, DBA TO BOOK_EX;
+
+3. sql 저장
+"C:\Users\양선우\Documents\javaspring\11. 개발공부\01.SpringWebProject_2022_07\localhost.sql"
+
+4. 현재 sql 포트 확인
+select dbms_xdb.gethttpport() from dual;
+
+5. 포트 변경
+exec dbms_xdb.sethttpport(9090);
+
+6. jar build path library 저장 및 Web Deployment Assembly 저장 할 것
+
+7. 연결 여부 JUnit Test 할 것 (JDBCTests.java)
+	INFO : org.zerock.persistence.JDBCTests - oracle.jdbc.driver.T4CConnection@58ceff1
+	
+	

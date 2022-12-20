@@ -1,0 +1,21 @@
+sqldeveloper
+
+1.
+CREATE USER book_ex1 IDENTIFIED BY book_ex1
+DEFAULT TABLESPACE USERS
+TEMPORARY TABLESPACE TEMP;
+
+2.
+GRANT CONNECT, DBA TO BOOK_EX;
+3.
+grant resource to book_ex;
+4.
+grant imp_full_database to book_ex;
+
+cmd
+5.
+cd C:\oraclexe\app\oracle\product\11.2.0\server\bin
+
+6.
+imp userid=book_ex1/book_ex1@XE FILE="c\dump\dump.dmp" 
+tables=(AUTHORITIES,PERSISTENT_LOGINS,TBL_ATTACH,TBL_BOARD,TBL_MEMBER,TBL_MEMBER_AUTH,TBL_REPLY,TBL_SAMPLE1,TBL_SAMPLE2,USERS)

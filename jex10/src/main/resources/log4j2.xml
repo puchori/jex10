@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="ERROR">
+
+    <Appenders>
+
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %level - %m%n%ex%n"/>
+        </Console>
+
+
+        <Console name="console-infolog" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %level - %m%n%ex%n"/>
+        </Console>
+        
+        <RollingFile name="rolling_error" fileName="C:/app/manager_logs/error.log" filePattern="C:/app/manager_logs/error-%d{yyyy-MM-dd}.log-%i">
+            <PatternLayout pattern="[%-5p] %d{yy-MM-dd HH:mm:ss} [%C{2}][%M][%L] - %m%n" />
+            <Policies>
+                <Policies>
+                    <SizeBasedTriggeringPolicy size="10000KB" />
+                </Policies>
+    		</Policies>
+       </RollingFile>
+      </Appenders> 
+        <loggers>
+        <Root level="INFO" additivity="false" >
+            <AppenderRef ref="console" />
+        </Root>
+        
+        <!-- log4j2 -->
+        <logger name="log4jdbc.log4j2" level="error" additivity="false">
+            <appender-ref ref="console" />
+        </logger>
+        
+        <!-- QUERY LOG -->
+        <logger name="jdbc.sqlonly" additivity="false" level="INFO">
+            <appender-ref ref="console" />
+        </logger>
+
+		<!-- RESULTSET TABLE -->
+        <logger name="jdbc.resultsettable" additivity="false" level="INFO">
+            <appender-ref ref="console" />
+        </logger>
+
+ 		<!-- query + time -->
+        <logger name="jdbc.sqltiming" level="off"/>
+        
+         <!-- 전체 로그 ( 양 상당히 많아짐 ) -->
+        <logger name="jdbc.audit" level="off"/>
+        
+         <!-- resultsettable + resultset (parameter) -->
+        <logger name="jdbc.resultset" level="off"/>
+        
+        <!-- connection log -->
+        <logger name="jdbc.connection" level="off"/>
+		
+       
+        <logger name = "com.error" level="INFO" additivity="false" >
+            <AppenderRef ref="rolling_error"/>
+        </logger>
+
+        <logger name = "com.console" level="INFO" additivity="false">
+            <AppenderRef ref="rolling_console"/>
+        </logger>
+    </loggers>
+</Configuration>
